@@ -1,4 +1,4 @@
-# Can Quantum Layers Offer an Advantage in Vision-Language Models?
+# Can Quantum Layers offer Performance and Security Advantages in Vision-Language Models?
 
 This repository contains the code for the paper:
 
