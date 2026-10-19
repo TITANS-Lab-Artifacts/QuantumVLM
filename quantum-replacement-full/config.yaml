@@ -1,0 +1,43 @@
+# Full-backbone replacement only. Paths resolve relative to this subfolder.
+model:
+  model_id: llava-hf/llava-onevision-qwen2-0.5b-si-hf
+  revision: 24efa9ce1ebc62c778946f8c6b119922ea6169bd
+  device: auto
+  dtype: auto
+  lora_rank: 8
+  lora_alpha: 16
+  lora_dropout: 0.05
+  gradient_checkpointing: false
+experiment:
+  family: basic-ring-quantum-4qubit
+  mode: full_unfrozen
+  placement: r1
+  blocks: 2
+  block_index: null
+  chunk_size: 256
+  seed: 0
+data:
+  root: ../data/vsr
+  track: random
+  train_limit: null
+  eval_limit: null
+training:
+  epochs: 20
+  patience: 5
+  min_delta: 0.0
+  accumulation: 16
+  lr: null
+  weight_decay: 0.01
+  clip_norm: 1.0
+  warmup_fraction: 0.05
+  save_every_updates: 100
+  log_every_updates: 10
+evaluation:
+  split: dev
+  allow_test: false
+  bootstrap_draws: 1000
+monitor:
+  interval_seconds: 1.0
+output:
+  root: runs
+  run_name: null

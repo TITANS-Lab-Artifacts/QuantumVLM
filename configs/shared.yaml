@@ -1,0 +1,77 @@
+# Paths are relative to the project root. See README.md and commands.md.
+model:
+  model_id: llava-hf/llava-onevision-qwen2-0.5b-si-hf
+  revision: 24efa9ce1ebc62c778946f8c6b119922ea6169bd
+  device: auto
+  dtype: auto
+  lora_rank: 8
+  lora_alpha: 16
+  lora_dropout: 0.05
+  gradient_checkpointing: false
+experiment:
+  family: classical
+  mode: lora
+  placement: q4
+  blocks: 2
+  block_index: null
+  chunk_size: 256
+  seed: 0
+data:
+  root: data/vsr
+  track: random
+  train_limit: null
+  eval_limit: null
+training:
+  epochs: 20
+  patience: 5
+  min_delta: 0.0
+  accumulation: 16
+  lr: null
+  weight_decay: 0.01
+  clip_norm: 1.0
+  warmup_fraction: 0.05
+  save_every_updates: 100
+  log_every_updates: 10
+cache:
+  enabled: true
+  directory: feature_cache
+  verify_examples: 3
+  atol: 1.0e-05
+  rtol: 0.0001
+evaluation:
+  split: dev
+  allow_test: false
+  bootstrap_draws: 1000
+monitor:
+  interval_seconds: 1.0
+attacks:
+  names:
+  - fgsm
+  - pgd_ce
+  - pgd_margin
+  - spsa
+  - hsj
+  - transfer
+  epsilon: 0.01568627450980392
+  steps: 100
+  restarts: 5
+  step_size: null
+  query_budget: 1000
+  spsa_samples: 16
+  spsa_delta: 0.01
+  hsj_steps: 32
+  limit: 200
+  save_images: true
+  objective: untargeted
+  surrogate_checkpoint: runs/classical/frozen_head/seed0/best
+diagnostics:
+  examples: 3
+  directions: 3
+  steps:
+  - 0.0003
+  - 0.0001
+  - 3.0e-05
+  - 1.0e-05
+output:
+  root: runs
+  run_name: null
